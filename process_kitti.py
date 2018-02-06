@@ -29,7 +29,7 @@ def download_data():
     for c in categories:
         url = "http://www.cvlibs.net/datasets/kitti/raw_data.php?type=" + c
         r = requests.get(url)
-        soup = BeautifulSoup(r.content)
+        soup = BeautifulSoup(r.content, "html5lib")
         drive_list = soup.find_all("h3")
         drive_list = [d.text[:d.text.find(' ')] for d in drive_list]
         print "Downloading set: " + c
