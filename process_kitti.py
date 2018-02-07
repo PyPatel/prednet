@@ -48,8 +48,8 @@ def extract_data():
         _, _, zip_files = os.walk(c_dir).next()
         for f in zip_files:
             print 'unpacking: ' + f
-            spec_folder = f[:10] + '/' + f[:-4] + '/image_03/data*'
-            command = 'unzip -qq ' + c_dir + f + ' ' + spec_folder + ' -d ' + c_dir + f[:-4]
+            #spec_folder = f[:10] + '/' + f[:-4] + '/image_03/data*'
+            command = 'unzip -qq ' + c_dir + f + ' -d ' + c_dir + f[:-4]
             os.system(command)
 
 
@@ -69,7 +69,7 @@ def process_data():
         im_list = []
         source_list = []  # corresponds to recording that image came from
         for category, folder in splits[split]:
-            im_dir = os.path.join(DATA_DIR, 'raw/', category, folder, folder[:10], folder, 'image_03/data/')
+            im_dir = os.path.join(DATA_DIR, 'raw/', category, folder, folder[:10], folder) #, 'image_03/data/')
             _, _, files = os.walk(im_dir).next()
             im_list += [im_dir + f for f in sorted(files)]
             source_list += [category + '-' + folder] * len(files)
